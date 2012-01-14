@@ -1,0 +1,13 @@
+body {
+    font-size:25px;
+}
+
+textarea
+{
+    width:100%;
+    font-size:25px;
+}
+
+#div_processword {
+    display:none;
+}
