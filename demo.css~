@@ -1,0 +1,39 @@
+body {
+    font-size:25px;
+}
+
+textarea
+{
+    width:100%;
+    font-size:25px;
+}
+
+#div_processword {
+    display:none;
+}
+
+#div_addword_phrase {
+    display:none;
+}
+
+
+#div_controls{
+    display:none;
+}
+
+.controlButton {
+    color:#FFFFFF;
+    background: -webkit-linear-gradient(left, #2F2727, #1a82f8);
+    border-radius: 5px;
+    cursor:pointer;
+    display:inline;
+}
+
+
+.mainOption {
+    margin:25px;
+    padding:25px;
+    background: -webkit-linear-gradient(left, #2F2727, #1a82f8);
+    border-radius: 5px;
+    cursor:pointer;
+}

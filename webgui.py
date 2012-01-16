@@ -148,9 +148,11 @@ def launch_browser(uri, quit_function=None, echo=True):
     if quit_function is not None:
         window.connect('destroy', quit_function)
 
-    box.pack_start(browser, expand=False, fill=False, padding=0)
+    box.pack_start(browser, expand=True, fill=True, padding=0)
+    
+    window.set_default_size(400, 400)
+    window.set_geometry_hints(min_width=400, max_width=400, min_height=250, max_height=250)
 
-    window.set_default_size(400, 100)
     window.show_all()
 
     message_queue = Queue.Queue()

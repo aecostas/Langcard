@@ -23,16 +23,6 @@ function processWord() {
 	data.words = words;
 	data.phrase = phrase;
 	send(JSON.stringify(data));
-	
-	$('#div_processword').hide();	
-	$('#div_addword_phrase').show();
-	
-	$('#input_accept_ok').unbind('click', processWord);
-	
-	$('#input_accept_ok').click(acceptPhrase);
-
-	$('#ta_phrase').text("");
-	
     } else {
 	$('#foreignword').val(words[currentWordIndex].foreign);
     }

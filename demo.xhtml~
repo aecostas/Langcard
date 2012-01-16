@@ -41,16 +41,18 @@
       
     </div>
 
-    <div id="div_addword_phrase" class="panelContent">
-      <textarea id="ta_phrase" rows="5"></textarea> 
+    <div id="div_addword_phrase">
+      <textarea id="ta_phrase" rows="5">
+	At W3Schools you will find all the Web-building tutorials you need, from basic HTML to advanced XML, SQL, ASP, and PHP.
+      </textarea> 
     </div>
     
     
-    <div id="div_selectword_phrase" class="panelContent">
+    <div id="div_selectword_phrase">
       
     </div>
     
-    <div id="div_processword" class="panelContent">
+    <div id="div_processword">
       <form id="form_word_data">
 	
 	<!--<label for="foreignword"></label> -->
@@ -68,6 +70,8 @@
 	</select>
 	
 	<br />
+
+
 	
 	<textarea id="ta_comments" rows="2"></textarea> 
 	<br />
