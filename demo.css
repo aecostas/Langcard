@@ -43,3 +43,7 @@ textarea
     border-radius: 5px;
     cursor:pointer;
 }
+
+label{
+     font-size:15px;   
+}

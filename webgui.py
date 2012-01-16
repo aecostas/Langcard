@@ -52,8 +52,6 @@ class WebKitMethods(object):
 
 
 
-
-
 class GtkMozEmbedMethods(object):
 
     @staticmethod
@@ -150,8 +148,8 @@ def launch_browser(uri, quit_function=None, echo=True):
 
     box.pack_start(browser, expand=True, fill=True, padding=0)
     
-    window.set_default_size(400, 400)
-    window.set_geometry_hints(min_width=400, max_width=400, min_height=250, max_height=250)
+#    window.set_default_size(400, 400)
+    window.set_geometry_hints(min_width=400, max_width=400, min_height=300, max_height=300)
 
     window.show_all()
 

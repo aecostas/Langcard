@@ -1,8 +1,7 @@
-var palabras;
 var currentWordIndex=0;
 var words = {};
 var wordCounter = 0;
-var phrase;
+
 
 function processWord() {
 
@@ -30,11 +29,11 @@ function processWord() {
 	$('#input_accept_ok').unbind('click', processWord);
 	
 	$('#input_accept_ok').click(acceptPhrase);
+	cleanup();
 
-	$('#ta_phrase').text("");
-	
     } else {
 	$('#foreignword').val(words[currentWordIndex].foreign);
+	//$('#foreignword').focus();
     }
 
 }// processWord
@@ -52,6 +51,11 @@ function processSelectedWords() {
 	}
 	
     });
+
+    if (0 == wordCounter) {
+	alert("Select at least one word!");
+	return;
+    }
     
     $('#div_selectword_phrase').hide();
     $('#div_processword').show();	
@@ -69,7 +73,6 @@ function selectWord() {
    if ($('#'+this.id).css('color') == 'rgb(0, 128, 0)') {
       $('#'+this.id).css('color','black');
    } else {
-
       $('#'+this.id).css('color','green');
    }
 
@@ -79,6 +82,12 @@ function selectWord() {
 function acceptPhrase() {
     // trim, delete repeated whitespace, split into words
     phrase = $.trim($('#ta_phrase').val()).replace(/\s+/g,' ');
+
+    if (phrase == "") {
+	alert("Write a phrase!");
+	return;
+    }
+
     palabras = phrase.split(' ');
     for (i=0; i<palabras.length; i++) {
         $('#div_selectword_phrase').append('<span id=\"word'+i+'\">'+palabras[i]+'</span><span> </span>');
@@ -98,8 +107,21 @@ function showAdd() {
     $('#div_controls').show();
     $('#input_accept_ok').click(acceptPhrase);
     $('#div_main').hide();
+    $('#ta_phrase').focus();
 }
 
+
+
+function cleanup() {
+    $('#ta_phrase').text("");
+    
+    $('#div_selectword_phrase').children().remove();
+
+    currentWordIndex=0;
+    words = {};
+    wordCounter = 0;
+    
+}
 
 function home() {
     
@@ -111,7 +133,7 @@ function home() {
     $('#input_accept_ok').unbind('click', acceptPhrase);
     $('#input_accept_ok').unbind('click', processSelectedWords);
 
-    $('#div_selectword_phrase').children().remove();
+    cleanup();
     
     $('#div_main').show();
 }
