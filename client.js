@@ -21,7 +21,7 @@ function processWord() {
 	
 	data.words = words;
 	data.phrase = phrase;
-	send(JSON.stringify(data));
+	send("SETPHRA"+JSON.stringify(data));
 	
 	$('#div_processword').hide();	
 	$('#div_addword_phrase').show();
@@ -116,6 +116,7 @@ function cleanup() {
     $('#ta_phrase').text("");
     
     $('#div_selectword_phrase').children().remove();
+    $('#table_phrase_list').children().remove();
 
     currentWordIndex=0;
     words = {};
@@ -128,6 +129,7 @@ function home() {
     $('#div_processword').hide();	
     $('#div_addword_phrase').hide();
     $('#div_controls').hide();
+    $('#div_show_phrase_list').hide();
 
     $('#input_accept_ok').unbind('click', processWord);
     $('#input_accept_ok').unbind('click', acceptPhrase);
@@ -139,13 +141,46 @@ function home() {
 }
 
 
+function showList() {
+    send("GETLIST");
+    $('#div_main').hide();
+    $('#div_show_phrase_list').show();
+    $('#div_controls').show();
+}
+
+ 
+function setList(lista) {
+
+    phrases = eval('('+lista+')');
+
+    for (elemento in phrases) {
+	var str_phrase="";
+	var count=0;
+	
+	var splitted_phrase = phrases[elemento]["phrase"].split(' ');
+	
+	for (word in splitted_phrase) {
+	    str_phrase += "<span>"+splitted_phrase[word]+" </span>";
+	}
+
+	$('#table_phrase_list').append('<tr><div id="div_'+phrases[elemento]["id"]+'" class="fila_impar" >'+ str_phrase +'</div> </tr>');
+
+	for (word in phrases[elemento]["words"]) {
+	    
+	    $('#div_'+phrases[elemento]["id"]+' span:nth-child('+(phrases[elemento]["words"][word]['position']+1)+')').css('color','green');
+	    $('#div_'+phrases[elemento]["id"]+' span:nth-child('+(phrases[elemento]["words"][word]['position']+1)+')').attr('title', phrases[elemento]["words"][word]['translation']);
+
+	}
+
+    }// for elemento in phrases
+}
+
+
+
 $(document).ready(function() {
     $('#mainOption_add').click(showAdd);
+    $('#mainOption_list').click(showList);
+    
     $('#input_accept_home').click(home);
 
-    // http://docs.jquery.com/Events/bind
-    //     $('#messages').click(got_a_click);
-    // http://jollytoad.googlepages.com/json.js provides $.toJSON(...):
-//    send($.toJSON('document.ready'));
-  
 })

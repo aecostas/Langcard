@@ -22,8 +22,8 @@ function send(msg) {
     document.title = msg;
 }
 
-function alerta() {
-alert("alerta en javascript");
+function alerta(datos) {
+alert("alerta en javascript: "+datos);
 
 send("'python_print'");
 }

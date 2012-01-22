@@ -1,17 +1,19 @@
 body {
-    background:#00FF00;
+    background:#AAAAAA;
     font-size:20px;
 }
 
 textarea
 {
-    width:100%;
+    width:95%;
     font-size:25px;
 }
 
 .panelContent {
     display:none;
     padding-bottom:45px;   /* Height of the footer */
+    height:180px;
+    overflow:auto;
 }
 
 
@@ -26,7 +28,7 @@ textarea
 .controlButton {
     color:#FFFFFF;
 /*    background: -webkit-linear-gradient(left, #2F2727, #1a82f8);*/
-    background:#FF0000;
+    background:#444444;
     border-radius: 5px;
     cursor:pointer;
     display:inline;
@@ -39,10 +41,25 @@ textarea
     margin:25px;
     padding:25px;
 /*    background: -webkit-linear-gradient(left, #2F2727, #1a82f8);*/
-    background:#FF0000;
+    background:#444444;
     border-radius: 5px;
     cursor:pointer;
 }
+
+.fila_par {
+    background:#AAAAAA;
+    border-radius: 5px;
+    margin-top:5px;
+    padding:5px;
+}
+
+.fila_impar {
+    background:#444444;
+    border-radius: 5px;
+    padding:5px;
+    margin-top:5px;
+}
+
 
 label{
      font-size:15px;   

@@ -171,7 +171,7 @@ def launch_browser(uri, quit_function=None, echo=True):
             return msg
 
     def web_send(msg):
-        if echo: print '<<<', msg
+        #if echo: print '<<<', msg
         asynchronous_gtk_message(implementation.inject_javascript)(browser, msg)
 
     return browser, web_recv, web_send

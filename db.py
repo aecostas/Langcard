@@ -12,8 +12,24 @@ class LangcardDB:
         self.conn.close ()
 
 
-    def langcardGetPhraseList():
-        pass
+    def langcardGetPhraseList(self):
+        phrases = {}
+        cursor = self.conn.cursor()
+
+        cursor.execute ("select phrases.id, words.comments, words.original, words.translation, phrases.phrase, phrases_words.position from phrases inner join phrases_words on phrases.id=phrases_words.id_phrase inner join words on phrases_words.id_word=words.id order by phrases.id;")
+
+        row = cursor.fetchone()
+        while row is not None:
+            print "Row..."
+
+            if row:
+                print "row != null"
+                phrases[len(phrases)] = row;
+            row = cursor.fetchone()
+
+
+        cursor.close ()
+        return phrases
 
 
     def langcardSetPhrase(self, data):

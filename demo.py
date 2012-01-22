@@ -39,23 +39,54 @@ def main():
     uptime_seconds = 1
     clicks = 0
     while not Global.quit:
-
+        # GETLIST
+        # SETPHRA
         current_time = time.time()
         again = False
         msg = web_recv()
+
         if msg:
-            msg = from_json(msg)
+            print msg
+
+        if msg and msg[0:7]=="SETPHRA":
+            msg = from_json(msg[7:])
             langcard_db.langcardSetPhrase(msg);
-
             again = True
+            continue
 
-        if msg == "got-a-click":
-            clicks += 1
-            web_send('document.getElementById("messages").innerHTML = %s' %
-                     to_json('%d clicks so far' % clicks))
-            # If you are using jQuery, you can do this instead:
-            # web_send('$("#messages").text(%s)' %
-            #          to_json('%d clicks so far' % clicks))
+        if msg and msg[0:7]=="GETLIST":
+            phrases = langcard_db.langcardGetPhraseList()
+            previd=-1
+            phraselist = {}
+            phrase = {}
+            print phrases
+            phrase['id'] = phrases[0][0]
+            phrase['phrase'] = phrases[0][4]
+            phrase['words'] = {}
+
+            for index in phrases:
+                currentid=phrases[index][0]
+                word = {}
+                word['original'] = phrases[index][2];
+                word['translation'] = phrases[index][3];
+                word['comments'] = phrases[index][1];
+                word['position'] = phrases[index][5];
+
+                phrase['words'][len(phrase['words'])] = word;
+
+                if (currentid!=previd):
+                    phraselist[len(phraselist)] = phrase
+                    phrase = {}
+                    phrase['id'] = phrases[index][0]
+                    phrase['phrase'] = phrases[index][4]
+                    phrase['words'] = {}
+
+                previd=currentid;
+
+            phraselist = to_json(phraselist)
+            phraselist = phraselist.replace('\'','')
+            web_send("setList('%s')" % (phraselist));
+
 
         if again: pass
         else:     time.sleep(0.1)
