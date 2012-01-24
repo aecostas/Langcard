@@ -1,11 +1,13 @@
-import MySQLdb
+#import MySQLdb
+import sqlite3
 
 class LangcardDB:
     def __init__(self):
-        self.conn = MySQLdb.connect (host = "localhost",
-                                     user = "root",
-                                     passwd = "root",
-                                     db = "langcards")
+#        self.conn = MySQLdb.connect (host = "localhost",
+#                                     user = "root",
+#                                     passwd = "root",
+#                                     db = "langcards")
+        self.conn = sqlite3.connect('db/langcard.db')
 
         
     def __del__(self):
@@ -20,28 +22,29 @@ class LangcardDB:
 
         row = cursor.fetchone()
         while row is not None:
-            print "Row..."
 
             if row:
-                print "row != null"
+                print row
                 phrases[len(phrases)] = row;
             row = cursor.fetchone()
 
-
         cursor.close ()
+
         return phrases
 
 
     def langcardSetPhrase(self, data):
         cursor = self.conn.cursor()
             
-        cursor.execute ("insert into phrases set phrase=\""+data["phrase"]+"\";")
-        phrase_id = self.conn.insert_id()
+        cursor.execute ("insert into phrases (phrase ) values (\""+data["phrase"]+"\");")
+        self.conn.commit()
+        phrase_id = cursor.lastrowid;
 
         for word in data["words"]:
             cursor.execute ("insert into words (original, translation, comments) values (\"%s\",\"%s\",\"%s\")" % (data["words"][word]["foreign"], data["words"][word]["nativeword"], data["words"][word]["comments"]))
+            self.conn.commit()
 
-            cursor.execute("insert into phrases_words (id_phrase, id_word, position) values (%d, %d, %d)" % (phrase_id, self.conn.insert_id(), data["words"][word]["position"]));
-
+            cursor.execute("insert into phrases_words (id_phrase, id_word, position) values (%d, %d, %d)" % (phrase_id, cursor.lastrowid, data["words"][word]["position"]));
+            self.conn.commit()
         cursor.close ()
 

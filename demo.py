@@ -58,14 +58,17 @@ def main():
             phrases = langcard_db.langcardGetPhraseList()
             previd=-1
             phraselist = {}
-            phrase = {}
-            print phrases
-            phrase['id'] = phrases[0][0]
-            phrase['phrase'] = phrases[0][4]
-            phrase['words'] = {}
 
             for index in phrases:
                 currentid=phrases[index][0]
+
+                if (currentid!=previd):
+
+                    phrase = {}
+                    phrase['id'] = phrases[index][0]
+                    phrase['phrase'] = phrases[index][4]
+                    phrase['words'] = {}
+
                 word = {}
                 word['original'] = phrases[index][2];
                 word['translation'] = phrases[index][3];
@@ -76,17 +79,14 @@ def main():
 
                 if (currentid!=previd):
                     phraselist[len(phraselist)] = phrase
-                    phrase = {}
-                    phrase['id'] = phrases[index][0]
-                    phrase['phrase'] = phrases[index][4]
-                    phrase['words'] = {}
-
+              
                 previd=currentid;
 
+#            phraselist[len(phraselist)] = phrase
             phraselist = to_json(phraselist)
+
             phraselist = phraselist.replace('\'','')
             web_send("setList('%s')" % (phraselist));
-
 
         if again: pass
         else:     time.sleep(0.1)
