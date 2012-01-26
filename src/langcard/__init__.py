@@ -27,7 +27,7 @@ def main():
     langcard_db = LangcardDB();
 
     # Create a proper file:// URL pointing to demo.xhtml:
-    file = os.path.abspath('demo.xhtml')
+    file = os.path.abspath('html/demo.xhtml')
     uri = 'file://' + urllib.pathname2url(file)
     browser, web_recv, web_send = \
         synchronous_gtk_message(launch_browser)(uri,

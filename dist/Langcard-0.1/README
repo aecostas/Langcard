@@ -1,0 +1,2 @@
+Dump mysql database
+mysqldump langcards -uXXXX -pXXXX --no-data

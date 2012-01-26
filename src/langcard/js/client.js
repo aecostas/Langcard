@@ -134,7 +134,7 @@ function home() {
     $('#input_accept_ok').unbind('click', processWord);
     $('#input_accept_ok').unbind('click', acceptPhrase);
     $('#input_accept_ok').unbind('click', processSelectedWords);
-
+    $('#input_accept_ok').show();
     cleanup();
     
     $('#div_main').show();
@@ -146,6 +146,7 @@ function showList() {
     $('#div_main').hide();
     $('#div_show_phrase_list').show();
     $('#div_controls').show();
+    $('#input_accept_ok').hide();
 }
 
  
