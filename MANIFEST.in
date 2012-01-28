@@ -1,0 +1,9 @@
+include README
+include setup.py
+include src/langcard/__init__.py
+include src/langcard/db.py
+include src/langcard/webgui.py
+recursive-include src/langcard/js *.js
+recursive-include src/langcard/css *.css
+recursive-include src/langcard/html *.html *.xhtml
+recursive-include src/langcard/db *
