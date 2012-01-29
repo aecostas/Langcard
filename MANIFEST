@@ -3,3 +3,15 @@ setup.py
 src/langcard/__init__.py
 src/langcard/db.py
 src/langcard/webgui.py
+src/langcard/css/demo.css
+src/langcard/db/db.sql
+src/langcard/db/langcard.db
+src/langcard/html/demo.xhtml
+src/langcard/js/client.js
+src/langcard/js/ipc.js
+src/langcard/js/jquery-1.7.1.min.js
+src/langcard/js/jquery.bgiframe.js
+src/langcard/js/jquery.delegate.js
+src/langcard/js/jquery.dimensions.js
+src/langcard/js/jquery.tooltip.min.js
+src/langcard/js/json-serialization.js

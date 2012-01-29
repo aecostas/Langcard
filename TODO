@@ -1,1 +1,11 @@
 1) Para leer los mensajes que se envían desde la web, la aplicación python hace un sondeo!!! Averiguar si es posible que sea asíncrono
+
+2) Design a plugin architecture for adding new functionalities and accessing them from the main panel. Each new functionality has:
+     - icon and/or name
+     - description
+     - javascript and css files
+
+These functionalities have to be located in a known folder for being read by the main application in order to build the main menu.
+
+3) Show current phrase while filling word form
+

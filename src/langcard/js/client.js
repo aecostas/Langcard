@@ -1,10 +1,9 @@
 var currentWordIndex=0;
 var words = {};
 var wordCounter = 0;
-
+var phrase="";
 
 function processWord() {
-
     words[currentWordIndex].nativeword = $('#nativeword').val();
     words[currentWordIndex].comments = $.trim($('#ta_comments').val()).replace(/\s+/g,' ').split(' ');
     words[currentWordIndex].value = $('#wordtype').val();
@@ -56,8 +55,10 @@ function processSelectedWords() {
 	alert("Select at least one word!");
 	return;
     }
-    
+
     $('#div_selectword_phrase').hide();
+
+    $('#div_selectword_phrase').children().clone().appendTo('#div_currentPhrase');
     $('#div_processword').show();	
     
     $('#input_accept_ok').unbind('click', processSelectedWords);
@@ -101,6 +102,7 @@ function acceptPhrase() {
 
     $("[id^=word]").click(selectWord);
 }
+
 
 function showAdd() {
     $('#div_addword_phrase').show();
@@ -149,7 +151,7 @@ function showList() {
     $('#input_accept_ok').hide();
 }
 
- 
+
 function setList(lista) {
 
     phrases = eval('('+lista+')');

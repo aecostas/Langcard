@@ -1,2 +1,6 @@
 Dump mysql database
 mysqldump langcards -uXXXX -pXXXX --no-data
+
+Install
+sudo python setup.install
+
