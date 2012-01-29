@@ -58,6 +58,7 @@ function processSelectedWords() {
 
     $('#div_selectword_phrase').hide();
 
+    $('#div_currentPhrase').children().remove();
     $('#div_selectword_phrase').children().clone().appendTo('#div_currentPhrase');
     $('#div_processword').show();	
     
