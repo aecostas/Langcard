@@ -4,6 +4,7 @@ var wordCounter = 0;
 var phrase="";
 
 function processWord() {
+
     words[currentWordIndex].nativeword = $('#nativeword').val();
     words[currentWordIndex].comments = $.trim($('#ta_comments').val()).replace(/\s+/g,' ').split(' ');
     words[currentWordIndex].value = $('#wordtype').val();
@@ -59,8 +60,13 @@ function processSelectedWords() {
     $('#div_selectword_phrase').hide();
 
     $('#div_currentPhrase').children().remove();
-    $('#div_selectword_phrase').children().clone().appendTo('#div_currentPhrase');
-    $('#div_processword').show();	
+
+    $('#div_selectword_phrase').children().each(function() {
+	    $('#div_currentPhrase').append('<span style="color:'+$(this).css('color')+'">'+$(this).text()+'</span>');
+    });
+
+
+    $('#div_processword').show();
     
     $('#input_accept_ok').unbind('click', processSelectedWords);
     $('#input_accept_ok').click(processWord);
@@ -116,16 +122,19 @@ function showAdd() {
 
 
 function cleanup() {
+
     $('#ta_phrase').text("");
     
     $('#div_selectword_phrase').children().remove();
     $('#table_phrase_list').children().remove();
 
     currentWordIndex=0;
-    words = {};
-    wordCounter = 0;
-    
+    words={};
+    wordCounter=0;
+    phrase="";  
+
 }
+
 
 function home() {
     
@@ -182,9 +191,15 @@ function setList(lista) {
 
 
 $(document).ready(function() {
-    $('#mainOption_add').click(showAdd);
-    $('#mainOption_list').click(showList);
-    
-    $('#input_accept_home').click(home);
 
+	console.log("window.File: "+window.File);
+	console.log("window.FileReader: "+window.FileReader);
+	console.log("window.FileList: "+window.FileList);
+	console.log("window.Blob: "+window.Blob);
+	
+	$('#mainOption_add').click(showAdd);
+	$('#mainOption_list').click(showList);
+	
+	$('#input_accept_home').click(home);
+    
 })
