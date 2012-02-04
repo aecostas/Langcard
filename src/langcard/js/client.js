@@ -120,19 +120,15 @@ function showAdd() {
 }
 
 
-
 function cleanup() {
-
-    $('#ta_phrase').text("");
-    
+    $('#ta_phrase').val("");
     $('#div_selectword_phrase').children().remove();
     $('#table_phrase_list').children().remove();
 
     currentWordIndex=0;
     words={};
     wordCounter=0;
-    phrase="";  
-
+    phrase="";
 }
 
 
