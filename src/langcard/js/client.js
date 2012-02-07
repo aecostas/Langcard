@@ -124,6 +124,7 @@ function cleanup() {
     $('#ta_phrase').val("");
     $('#div_selectword_phrase').children().remove();
     $('#table_phrase_list').children().remove();
+    
 
     currentWordIndex=0;
     words={};
@@ -133,11 +134,13 @@ function cleanup() {
 
 
 function home() {
-    
+
     $('#div_processword').hide();	
     $('#div_addword_phrase').hide();
     $('#div_controls').hide();
     $('#div_show_phrase_list').hide();
+    $('#div_random_word').hide();
+    $('#div_selectword_phrase').hide();
 
     $('#input_accept_ok').unbind('click', processWord);
     $('#input_accept_ok').unbind('click', acceptPhrase);
@@ -149,6 +152,22 @@ function home() {
 }
 
 
+function showRandomWord() {
+
+    $('#div_main').hide();
+    $('#div_random_word').show();
+    $('#div_controls').show();
+    $('#input_accept_ok').show();
+    $('#input_accept_ok').click(requestRandomWord);
+    requestRandomWord();
+}// showRandomList
+
+
+function requestRandomWord() {
+    send("GETRAND");    
+}
+
+
 function showList() {
     send("GETLIST");
     $('#div_main').hide();
@@ -156,6 +175,28 @@ function showList() {
     $('#div_controls').show();
     $('#input_accept_ok').hide();
 }
+
+
+function setRandomWord(_phrase) {
+    phrase = eval('('+_phrase+')');
+    str_phrase="";
+
+    var splitted_phrase = phrase['phrase'].split(' ');
+
+    $('#div_random_word_phrase').children().remove();
+
+    for (word in splitted_phrase) {
+    	str_phrase += "<span>"+splitted_phrase[word]+" </span>";
+    }
+
+    $('#div_random_word_phrase').append('<div id="div_word'+phrase["id"]+'" class="bigword" >'+ phrase["original"] +'</div>');
+
+    $('#div_random_word_phrase').append('<div id="div_phrase'+phrase["id"]+'" class="fila_impar" >'+ str_phrase +'</div>');
+	
+    $('#div_phrase'+phrase["id"]+' span:nth-child('+(phrase['position']+1)+')').css('color','green');
+	
+    
+}// setRandomWord
 
 
 function setList(lista) {
@@ -179,10 +220,11 @@ function setList(lista) {
 	    $('#div_'+phrases[elemento]["id"]+' span:nth-child('+(phrases[elemento]["words"][word]['position']+1)+')').css('color','green');
 	    $('#div_'+phrases[elemento]["id"]+' span:nth-child('+(phrases[elemento]["words"][word]['position']+1)+')').attr('title', phrases[elemento]["words"][word]['translation']);
 
-	}
+	}// for word in phrases[]
 
     }// for elemento in phrases
-}
+
+}// setList
 
 
 
@@ -195,6 +237,7 @@ $(document).ready(function() {
 	
 	$('#mainOption_add').click(showAdd);
 	$('#mainOption_list').click(showList);
+	$('#mainOption_random').click(showRandomWord);
 	
 	$('#input_accept_home').click(home);
     

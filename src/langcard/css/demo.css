@@ -9,6 +9,14 @@ textarea
     font-size:20px;
 }
 
+.bigword {
+    font-size:35px;
+    text-align:center;
+    width:100%;
+    padding-top:20px;
+    padding-bottom:35px;
+}
+
 .panelContent {
     display:none;
     padding-bottom:45px;   /* Height of the footer */

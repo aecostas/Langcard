@@ -4,8 +4,9 @@
      - icon and/or name
      - description
      - javascript and css files
+     - html (just the div element (not a whole webpage)). The application must check if the id(s) are already defined
+     - cleanup function -> should be called whenever the element is hidden.
 
-These functionalities have to be located in a known folder for being read by the main application in order to build the main menu.
+These functionalities have to be located in a known folder for being read by the main application in order to build the main menu. Who loads the plugins: javascript or python?
 
 3) [DONE] Show current phrase while filling word form
-

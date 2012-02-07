@@ -41,12 +41,30 @@ def main():
     while not Global.quit:
         # GETLIST
         # SETPHRA
+        # GETRAND
         current_time = time.time()
         again = False
         msg = web_recv()
 
         if msg:
             print msg
+
+
+        if msg and msg[0:7]=="GETRAND":
+            randomword_array = langcard_db.langcardGetRandomWord();
+            randonword_struct = {}
+            randonword_struct['id'] = randomword_array[0];            
+            randonword_struct['comments'] = randomword_array[1];
+            randonword_struct['original'] = randomword_array[2];
+            randonword_struct['translation'] = randomword_array[3];
+            randonword_struct['phrase'] = randomword_array[4];
+            randonword_struct['position'] = randomword_array[5];
+            
+            randomword_json = to_json(randonword_struct)
+            randomword_json = randomword_json.replace('\'','')
+            print randomword_json
+            web_send("setRandomWord('%s')" % (randomword_json));
+            continue;
 
         if msg and msg[0:7]=="SETPHRA":
             msg = from_json(msg[7:])
@@ -63,7 +81,6 @@ def main():
                 currentid=phrases[index][0]
 
                 if (currentid!=previd):
-
                     phrase = {}
                     phrase['id'] = phrases[index][0]
                     phrase['phrase'] = phrases[index][4]
